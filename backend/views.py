@@ -32,6 +32,30 @@ def type_option_list(request):
     return Response(serializer.data)
 
 
+@swagger_auto_schema(method='GET', responses={200: MemberSerializer()})
+@api_view(['GET'])
+def member_form_get(request, pk):
+    try:
+        member = Member.objects.get(pk=pk)
+    except Member.DoesNotExist:
+        return Response({'error': 'Member does not exist.'}, status=404)
+
+    serializer = MemberSerializer(member)
+    return Response(serializer.data)
+
+
+@swagger_auto_schema(method='GET', responses={200: HabitSerializer()})
+@api_view(['GET'])
+def habit_form_get(request, pk):
+    try:
+        habit = Habit.objects.get(pk=pk)
+    except Habit.DoesNotExist:
+        return Response({'error': 'Habit does not exist.'}, status=404)
+
+    serializer = HabitSerializer(habit)
+    return Response(serializer.data)
+
+
 # POSTs
 @swagger_auto_schema(method='POST', request_body=MemberSerializer, responses={200: MemberSerializer()})
 @api_view(['POST'])
