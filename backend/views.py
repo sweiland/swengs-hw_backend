@@ -28,7 +28,7 @@ def habit_list(request):
 @api_view(['GET'])
 def type_option_list(request):
     types = Type.objects.all()
-    serializer = TypeSerializer(Type, many=True)
+    serializer = TypeSerializer(types, many=True)
     return Response(serializer.data)
 
 
@@ -73,6 +73,17 @@ def member_form_create(request):
 def habit_form_create(request):
     data = JSONParser().parse(request)
     serializer = HabitSerializer(data=data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=201)
+    return Response(serializer.errors, status=400)
+
+# POSTs
+@swagger_auto_schema(method='POST', request_body=TypeSerializer, responses={200: TypeSerializer()})
+@api_view(['POST'])
+def type_create(request):
+    data = JSONParser().parse(request)
+    serializer = TypeSerializer(data=data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=201)
