@@ -123,7 +123,7 @@ def member_delete(request, pk):
     return Response(status=204)
 
 
-@api_view(['PATCH'])
+@api_view(['DELETE'])
 def habit_delete(request, pk):
     try:
         habit = Habit.objects.get(pk=pk)

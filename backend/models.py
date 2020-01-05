@@ -41,11 +41,11 @@ class Type(models.Model):
 
 
 class Habit(models.Model):
-    start_date = models.DateField(default=timezone.now)
-    end_date = models.DateField(null=True)
+    start_date = models.DateTimeField(default=timezone.now)
+    end_date = models.DateTimeField(null=True)
     name = models.TextField()
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
-    type = models.ForeignKey(Type, on_delete=models.CASCADE)
+    type = models.ForeignKey(Type, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return '%s (since %s)' % (self.name, self.start_date)
