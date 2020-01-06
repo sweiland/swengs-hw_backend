@@ -4,17 +4,17 @@ from django.utils import timezone
 
 # Models based on project but currently simplified
 
-# class ProfilePicture(models.Model):
-#     class ColorChoices(models.TextChoices):
-#         RED = 'r', '#d4002d'
-#         GREEN = 'g', '#76b82a'
-#         TURQUOISE = 't', '#00afcb'
-#         YELLOW = 'y', '#f7a600'
-#         ORANGE = 'o', '#ec6608'
-#         VIOLET = 'v', '#af1280'
-#         BLUE = 'b', '#005ca9'
-#
-#     color = models.TextField(choices=ColorChoices.choices)
+class ProfilePicture(models.Model):
+    class ColorChoices(models.TextChoices):
+        RED = 'r', '#d4002d'
+        GREEN = 'g', '#76b82a'
+        TURQUOISE = 't', '#00afcb'
+        YELLOW = 'y', '#f7a600'
+        ORANGE = 'o', '#ec6608'
+        VIOLET = 'v', '#af1280'
+        BLUE = 'b', '#005ca9'
+
+    color = models.TextField(choices=ColorChoices.choices)
 
 
 class Member(models.Model):
@@ -25,7 +25,7 @@ class Member(models.Model):
     score = models.PositiveIntegerField(default=0)
     friends = models.ManyToManyField('self')
 
-    # profile_picture = models.ForeignKey(ProfilePicture, on_delete=models.CASCADE, null=True)
+    profile_picture = models.ForeignKey(ProfilePicture, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return '%s %s Level %s' % (self.first_name, self.last_name, self.level)
@@ -50,6 +50,6 @@ class Habit(models.Model):
     def __str__(self):
         return '%s (since %s)' % (self.name, self.start_date)
 
-# class Message(models.Model):
-#     message = models.TextField()
-#     type = models.ForeignKey(Type, on_delete=models.CASCADE)
+class Message(models.Model):
+    message = models.TextField()
+    type = models.ForeignKey(Type, on_delete=models.CASCADE)
