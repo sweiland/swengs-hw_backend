@@ -46,9 +46,11 @@ class Habit(models.Model):
     name = models.TextField()
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
     type = models.ForeignKey(Type, on_delete=models.CASCADE, null=True)
+    priority = models.PositiveSmallIntegerField(null=True)
 
     def __str__(self):
         return '%s (since %s)' % (self.name, self.start_date)
+
 
 class Message(models.Model):
     message = models.TextField()

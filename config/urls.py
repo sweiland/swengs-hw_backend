@@ -43,7 +43,7 @@ urlpatterns = [
     path('habit/<int:pk>/delete', views.habit_delete),
     path('type/options', views.type_option_list),
     path('type/create', views.type_create),
-    
+
     url(r'^api-token-auth/', obtain_jwt_token),
 
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
