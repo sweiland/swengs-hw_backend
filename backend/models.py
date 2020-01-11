@@ -23,7 +23,7 @@ class Member(models.Model):
     email = models.EmailField(null=True)
     level = models.PositiveIntegerField(default=1)
     score = models.PositiveIntegerField(default=0)
-    friends = models.ManyToManyField('self')
+    friends = models.ManyToManyField('self', blank=True)
 
     profile_picture = models.ForeignKey(ProfilePicture, on_delete=models.CASCADE, null=True)
 
